@@ -43,6 +43,7 @@ export const Hero = () => {
       style={{
         backgroundImage: `radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(14, 165, 233, 0.15), transparent 40%)`,
       }}
+      id="hero"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 z-0">
@@ -51,7 +52,7 @@ export const Hero = () => {
       </div>
 
       {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
+      <div className="absolute inset-0 bg-pattern opacity-[0.015] pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <div className="max-w-4xl mx-auto text-center">
@@ -128,7 +129,7 @@ export const Hero = () => {
 
             <Button
               variant="outline"
-              className="font-medium text-lg px-8 py-6 h-auto rounded-full"
+              className="border-theme-600 text-theme-600 hover:bg-theme-600/10 font-medium text-lg px-8 py-6 h-auto rounded-full"
             >
               <span>Get in Touch</span>
               <Code size={18} className="ml-2" />

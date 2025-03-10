@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
-import { Menu, X, Moon, Sun, Github, Linkedin, Instagram } from "lucide-react";
+import { Menu, X, Github, Linkedin, Instagram } from "lucide-react";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,6 +16,18 @@ export const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Fungsi untuk smooth scroll ke section yang diinginkan
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Tutup menu mobile jika terbuka
+      setMobileMenuOpen(false);
+
+      // Smooth scroll ke section
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   const navVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -44,7 +56,10 @@ export const Header = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="relative z-10">
+          <div
+            onClick={() => scrollToSection("hero")}
+            className="relative z-10 cursor-pointer"
+          >
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -59,7 +74,7 @@ export const Header = () => {
                 <span className="text-theme-600">Prasetya</span>
               </span>
             </motion.div>
-          </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <motion.nav
@@ -70,27 +85,42 @@ export const Header = () => {
           >
             <ul className="flex items-center space-x-8">
               <motion.li variants={itemVariants}>
-                <Link href="/" className="nav-link">
+                <button
+                  onClick={() => scrollToSection("hero")}
+                  className="nav-link cursor-pointer"
+                >
                   Home
-                </Link>
+                </button>
               </motion.li>
               <motion.li variants={itemVariants}>
-                <Link href="/projects" className="nav-link">
-                  Projects
-                </Link>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <Link href="/skills" className="nav-link">
-                  Skills
-                </Link>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <Link href="/about" className="nav-link">
+                <button
+                  onClick={() => scrollToSection("about")}
+                  className="nav-link cursor-pointer"
+                >
                   About
-                </Link>
+                </button>
               </motion.li>
               <motion.li variants={itemVariants}>
-                <Button className="bg-theme-600 hover:bg-theme-700 text-white rounded-full px-6">
+                <button
+                  onClick={() => scrollToSection("projects")}
+                  className="nav-link cursor-pointer"
+                >
+                  Projects
+                </button>
+              </motion.li>
+              <motion.li variants={itemVariants}>
+                <button
+                  onClick={() => scrollToSection("skills")}
+                  className="nav-link cursor-pointer"
+                >
+                  Skills
+                </button>
+              </motion.li>
+              <motion.li variants={itemVariants}>
+                <Button
+                  onClick={() => scrollToSection("contact")}
+                  className="bg-theme-600 hover:bg-theme-700 text-white rounded-full px-6"
+                >
                   Contact Me
                 </Button>
               </motion.li>
@@ -126,45 +156,41 @@ export const Header = () => {
         <div className="container mx-auto px-4 py-4">
           <ul className="flex flex-col space-y-4">
             <li>
-              <Link
-                href="/"
-                className="block py-2 hover:text-theme-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+              <button
+                onClick={() => scrollToSection("hero")}
+                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
               >
                 Home
-              </Link>
+              </button>
             </li>
             <li>
-              <Link
-                href="/projects"
-                className="block py-2 hover:text-theme-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+              <button
+                onClick={() => scrollToSection("projects")}
+                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
               >
                 Projects
-              </Link>
+              </button>
             </li>
             <li>
-              <Link
-                href="/skills"
-                className="block py-2 hover:text-theme-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+              <button
+                onClick={() => scrollToSection("skills")}
+                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
               >
                 Skills
-              </Link>
+              </button>
             </li>
             <li>
-              <Link
-                href="/about"
-                className="block py-2 hover:text-theme-600 transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+              <button
+                onClick={() => scrollToSection("about")}
+                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
               >
                 About
-              </Link>
+              </button>
             </li>
             <li className="pt-2">
               <Button
                 className="w-full bg-theme-600 hover:bg-theme-700 text-white"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => scrollToSection("contact")}
               >
                 Contact Me
               </Button>

@@ -93,11 +93,8 @@ export const Projects = () => {
   const regularProjects = projects.filter((project) => !project.featured);
 
   return (
-    <section
-      id="projects"
-      className="py-20 bg-gradient-to-b from-background to-muted/30"
-      ref={ref}
-    >
+    <section id="projects" className="py-20 bg-gradient-blue" ref={ref}>
+      <div className="absolute top-20 right-10 w-72 h-72 bg-accent2/10 rounded-full blur-3xl z-0" />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -208,59 +205,61 @@ export const Projects = () => {
               whileHover={{ y: -5 }}
               className="group"
             >
-              <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg dark:bg-dark-100/40 backdrop-blur-sm border-muted">
-                <div
-                  className="h-48 w-full bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-105"
-                  style={{
-                    backgroundImage: `url(${
-                      project.image || "/images/project-placeholder.jpg"
-                    })`,
-                  }}
-                />
-                <CardHeader className="pb-2">
-                  <CardTitle>{project.title}</CardTitle>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {project.tags.slice(0, 2).map((tag, i) => (
-                      <span
-                        key={i}
-                        className="text-xs px-2 py-0.5 rounded-full bg-theme-100 dark:bg-theme-900/30 text-theme-700 dark:text-theme-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 2 && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                        +{project.tags.length - 2}
-                      </span>
-                    )}
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="line-clamp-3">
-                    {project.description}
-                  </CardDescription>
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-medium text-theme-600 hover:text-theme-700 transition-colors"
-                  >
-                    <span>Live Demo</span>
-                    <ExternalLink size={12} />
-                  </a>
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs font-medium text-foreground hover:text-theme-600 transition-colors"
-                  >
-                    <span>View Code</span>
-                    <Github size={12} />
-                  </a>
-                </CardFooter>
-              </Card>
+              <div className="gradient-border">
+                <Card className="bg-card/80 backdrop-blur-sm">
+                  <div
+                    className="h-48 w-full bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-105"
+                    style={{
+                      backgroundImage: `url(${
+                        project.image || "/images/project-placeholder.jpg"
+                      })`,
+                    }}
+                  />
+                  <CardHeader className="pb-2">
+                    <CardTitle>{project.title}</CardTitle>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.tags.slice(0, 2).map((tag, i) => (
+                        <span
+                          key={i}
+                          className="text-xs px-2 py-0.5 rounded-full bg-theme-100 dark:bg-theme-900/30 text-theme-700 dark:text-theme-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {project.tags.length > 2 && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+                          +{project.tags.length - 2}
+                        </span>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="line-clamp-3">
+                      {project.description}
+                    </CardDescription>
+                  </CardContent>
+                  <CardFooter className="flex justify-between">
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-medium text-theme-600 hover:text-theme-700 transition-colors"
+                    >
+                      <span>Live Demo</span>
+                      <ExternalLink size={12} />
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-medium text-foreground hover:text-theme-600 transition-colors"
+                    >
+                      <span>View Code</span>
+                      <Github size={12} />
+                    </a>
+                  </CardFooter>
+                </Card>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -85,7 +85,7 @@ export const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-muted/30 to-background" ref={ref}>
+    <section id="skills" className="py-20 bg-gradient-accent" ref={ref}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -93,9 +93,12 @@ export const Skills = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold mb-2 inline-block gradient-heading">Technical Skills</h2>
+          <h2 className="text-3xl font-bold mb-2 inline-block gradient-heading">
+            Technical Skills
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            My technical toolkit and areas of expertise. I'm constantly learning and expanding my skill set.
+            My technical toolkit and areas of expertise. I'm constantly learning
+            and expanding my skill set.
           </p>
         </motion.div>
 
@@ -126,40 +129,52 @@ export const Skills = () => {
           animate={inView ? "show" : "hidden"}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
         >
-          {filteredSkills.map((skill) => (
-            <motion.div
-              key={skill.name}
-              variants={item}
-              className="group"
-            >
-              <div className="bg-card dark:bg-dark-100/40 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-muted">
-                <div className="relative w-16 h-16 mb-4 flex items-center justify-center">
-                  <div className="absolute inset-0 bg-muted/50 dark:bg-theme-900/20 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-8 h-8 relative z-10"
-                    onError={(e) => {
-                      // Fallback if image fails to load
-                      (e.target as HTMLImageElement).src = "/icons/code.svg";
-                    }}
-                  />
+          {filteredSkills.map((skill, index) => {
+            // Variasi warna untuk card skill
+            const bgColors = [
+              "bg-card", // warna default
+              "bg-theme-50/50", // biru sangat muda
+              "bg-accent2/5", // turquoise sangat muda
+              "bg-accent3/5", // kuning sangat muda
+            ];
+
+            const bgColor = bgColors[index % bgColors.length];
+
+            return (
+              <motion.div key={skill.name} variants={item} className="group">
+                <div
+                  className={`${bgColor} dark:bg-dark-100/40 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-muted`}
+                >
+                  <div className="relative w-16 h-16 mb-4 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-muted/50 dark:bg-theme-900/20 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
+                    <img
+                      src={skill.icon}
+                      alt={skill.name}
+                      className="w-8 h-8 relative z-10"
+                      onError={(e) => {
+                        // Fallback if image fails to load
+                        (e.target as HTMLImageElement).src = "/icons/code.svg";
+                      }}
+                    />
+                  </div>
+                  <h3 className="font-medium mb-2">{skill.name}</h3>
+                  <div className="w-full bg-muted rounded-full h-1.5 mt-auto">
+                    <motion.div
+                      className="bg-theme-600 h-1.5 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={
+                        inView ? { width: `${skill.level}%` } : { width: 0 }
+                      }
+                      transition={{ duration: 1, delay: 0.5 }}
+                    />
+                  </div>
+                  <span className="text-xs text-muted-foreground mt-1">
+                    {skill.level}%
+                  </span>
                 </div>
-                <h3 className="font-medium mb-2">{skill.name}</h3>
-                <div className="w-full bg-muted rounded-full h-1.5 mt-auto">
-                  <motion.div
-                    className="bg-theme-600 h-1.5 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                  />
-                </div>
-                <span className="text-xs text-muted-foreground mt-1">
-                  {skill.level}%
-                </span>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

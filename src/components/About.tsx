@@ -149,11 +149,13 @@ export const About = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-24"
         >
-          <h3 className="text-2xl font-bold mb-10 text-center">My Journey</h3>
+          <h3 className="text-2xl font-bold mb-10 text-center gradient-heading">
+            My Journey
+          </h3>
 
           <div className="relative">
-            {/* Timeline line - ubah menjadi sesuai tinggi konten */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-theme-600/40"></div>
+            {/* Timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-theme-500 via-accent2 to-accent3 opacity-40"></div>
 
             {/* Timeline events */}
             <div className="space-y-12">
@@ -164,6 +166,7 @@ export const About = () => {
                     "Frontend Developer Intern at PT Daekyung Indah Heavy Industry",
                   description:
                     "Contributed to Human Resource Management System development, implementing interfaces for room management, authentication, and payroll processing with responsive design and API integration.",
+                  dotColor: "bg-theme-600", // Warna biru tema
                 },
                 {
                   year: "2024",
@@ -171,24 +174,28 @@ export const About = () => {
                     "Frontend Developer at PT Digital Logistik Internasional",
                   description:
                     "Developed a prototype of the company's application with a more interactive and modern design, incorporating various animations.",
+                  dotColor: "bg-accent1", // Warna merah accent
                 },
                 {
                   year: "2024",
                   title: "Certification in Full-Stack Web Development",
                   description:
                     "Completed Frontend and Backend Web Developer certification courses on Dicoding platform, alongside Alibaba Cloud and Oracle certifications.",
+                  dotColor: "bg-accent2", // Warna turquoise accent
                 },
                 {
                   year: "2024",
                   title: "Developed Key Projects",
                   description:
                     "Created KS Spotseeker and Hunger Apps, implementing full-stack solutions with modern technologies and responsive design.",
+                  dotColor: "bg-accent3", // Warna kuning accent
                 },
                 {
                   year: "2021",
                   title: "Started Computer Science Degree",
                   description:
                     "Enrolled in the Informatics program at Diponegoro University, beginning my journey in computer science.",
+                  dotColor: "bg-theme-500", // Warna biru muda tema
                 },
               ].map((event, index) => (
                 <div key={index} className="relative">
@@ -218,6 +225,7 @@ export const About = () => {
                             : { opacity: 0, x: index % 2 === 0 ? 50 : -50 }
                         }
                         transition={{ duration: 0.5, delay: 0.1 * index }}
+                        className="p-6 rounded-xl bg-white dark:bg-dark-100/30 backdrop-blur-sm border border-muted hover:shadow-md transition-all duration-300"
                       >
                         <span className="text-theme-600 font-semibold">
                           {event.year}
@@ -236,7 +244,7 @@ export const About = () => {
                         initial={{ scale: 0 }}
                         animate={inView ? { scale: 1 } : { scale: 0 }}
                         transition={{ duration: 0.4, delay: 0.2 * index }}
-                        className="bg-theme-600 rounded-full h-5 w-5 border-4 border-background"
+                        className={`${event.dotColor} rounded-full h-5 w-5 border-4 border-background shadow-md`}
                       ></motion.div>
                     </div>
 

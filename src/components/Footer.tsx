@@ -23,7 +23,7 @@ export const Footer = () => {
     {
       name: "Email",
       icon: <Mail size={18} />,
-      href: "mailto:fikri.prasetya@example.com",
+      href: "mailto:fikriprasetya3@gmail.com",
     },
     {
       name: "GitHub",
@@ -48,67 +48,6 @@ export const Footer = () => {
     <footer className="relative overflow-hidden bg-gradient-to-b from-muted/50 to-muted">
       {/* Background pattern */}
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none" />
-
-      {/* Contact section */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="max-w-4xl mx-auto bg-card dark:bg-dark-100/50 rounded-2xl shadow-xl overflow-hidden backdrop-blur-sm border border-muted">
-          <div className="p-8 md:p-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="text-center mb-8"
-            >
-              <h2 className="text-2xl md:text-3xl font-bold gradient-heading mb-4">
-                Get In Touch
-              </h2>
-              <p className="text-muted-foreground max-w-lg mx-auto">
-                Have a project in mind or just want to say hello? I'd love to
-                hear from you!
-              </p>
-            </motion.div>
-
-            <motion.form
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="max-w-lg mx-auto"
-            >
-              <div className="flex gap-4">
-                <div className="flex-1">
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className="w-full bg-background rounded-lg border border-input px-4 py-2 focus:outline-none focus:ring-2 focus:ring-theme-500 focus:border-transparent transition-all duration-200"
-                  />
-                </div>
-                <div className="flex-1">
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="w-full bg-background rounded-lg border border-input px-4 py-2 focus:outline-none focus:ring-2 focus:ring-theme-500 focus:border-transparent transition-all duration-200"
-                  />
-                </div>
-              </div>
-              <div className="mt-4">
-                <textarea
-                  placeholder="Your message"
-                  rows={4}
-                  className="w-full bg-background rounded-lg border border-input px-4 py-2 focus:outline-none focus:ring-2 focus:ring-theme-500 focus:border-transparent transition-all duration-200"
-                ></textarea>
-              </div>
-              <div className="mt-4">
-                <Button className="w-full bg-theme-600 hover:bg-theme-700 text-white rounded-lg">
-                  <span>Send Message</span>
-                  <Send size={16} className="ml-2" />
-                </Button>
-              </div>
-            </motion.form>
-          </div>
-        </div>
-      </div>
 
       {/* Main footer */}
       <div className="border-t border-muted/50">
@@ -148,7 +87,7 @@ export const Footer = () => {
               <ul className="space-y-2">
                 <li>
                   <Link
-                    href="/"
+                    href="#home"
                     className="text-muted-foreground hover:text-theme-600 transition-colors"
                   >
                     Home
@@ -156,23 +95,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/projects"
-                    className="text-muted-foreground hover:text-theme-600 transition-colors"
-                  >
-                    Projects
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/skills"
-                    className="text-muted-foreground hover:text-theme-600 transition-colors"
-                  >
-                    Skills
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/about"
+                    href="#about"
                     className="text-muted-foreground hover:text-theme-600 transition-colors"
                   >
                     About Me
@@ -180,7 +103,24 @@ export const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/contact"
+                    href="#projects"
+                    className="text-muted-foreground hover:text-theme-600 transition-colors"
+                  >
+                    Projects
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#skills"
+                    className="text-muted-foreground hover:text-theme-600 transition-colors"
+                  >
+                    Skills
+                  </Link>
+                </li>
+                
+                <li>
+                  <Link
+                    href="#contact"
                     className="text-muted-foreground hover:text-theme-600 transition-colors"
                   >
                     Contact
