@@ -42,7 +42,7 @@ export const About = () => {
               <div className="bg-card h-[400px] md:h-[600px] w-full p-1 rounded-2xl overflow-hidden">
                 <div className="h-full w-full rounded-xl relative flex items-center justify-center">
                   <Image
-                    src="/images/profile.jpeg"
+                    src="/images/profile.webp"
                     alt="Fikri Prasetya Nurhidayat - Profile Photo"
                     width={400}
                     height={400}

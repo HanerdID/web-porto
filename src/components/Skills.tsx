@@ -19,39 +19,39 @@ export const Skills = () => {
 
   const skills: Skill[] = [
     // Programming Languages
-    { name: "JavaScript", icon: "/icons/js.png", level: 90, category: "language" },
-    { name: "TypeScript", icon: "/icons/ts.png", level: 85, category: "language" },
-    { name: "Python", icon: "/icons/python.png", level: 80, category: "language" },
-    { name: "PHP", icon: "/icons/php.png", level: 85, category: "language" },
-    { name: "Java", icon: "/icons/java.png", level: 75, category: "language" },
-    { name: "C", icon: "/icons/c.png", level: 70, category: "language" },
+    { name: "JavaScript", icon: "/icons/js.webp", level: 90, category: "language" },
+    { name: "TypeScript", icon: "/icons/ts.webp", level: 85, category: "language" },
+    { name: "Python", icon: "/icons/python.webp", level: 80, category: "language" },
+    { name: "PHP", icon: "/icons/php.webp", level: 85, category: "language" },
+    { name: "Java", icon: "/icons/java.webp", level: 75, category: "language" },
+    { name: "C", icon: "/icons/c.webp", level: 70, category: "language" },
     
     // Frontend
-    { name: "HTML5", icon: "/icons/html5.png", level: 95, category: "frontend" },
-    { name: "CSS3", icon: "/icons/css3.png", level: 90, category: "frontend" },
-    { name: "React.js", icon: "/icons/react.png", level: 90, category: "frontend" },
-    { name: "Next.js", icon: "/icons/nextjs.png", level: 85, category: "frontend" },
-    { name: "Tailwind CSS", icon: "/icons/tailwind.png", level: 90, category: "frontend" },
-    { name: "Bootstrap", icon: "/icons/bootstrap.png", level: 85, category: "frontend" },
-    { name: "shadcn/ui", icon: "/icons/shadcn.png", level: 80, category: "frontend" },
-    { name: "Ant Design", icon: "/icons/antdesign.png", level: 80, category: "frontend" },
-    { name: "DaisyUI", icon: "/icons/daisyui.png", level: 75, category: "frontend" },
-    { name: "Flowbite", icon: "/icons/flowbite.png", level: 75, category: "frontend" },
-    { name: "Framer Motion", icon: "/icons/framer.png", level: 80, category: "frontend" },
+    { name: "HTML5", icon: "/icons/html5.webp", level: 95, category: "frontend" },
+    { name: "CSS3", icon: "/icons/css3.webp", level: 90, category: "frontend" },
+    { name: "React.js", icon: "/icons/react.webp", level: 90, category: "frontend" },
+    { name: "Next.js", icon: "/icons/nextjs.webp", level: 85, category: "frontend" },
+    { name: "Tailwind CSS", icon: "/icons/tailwind.webp", level: 90, category: "frontend" },
+    { name: "Bootstrap", icon: "/icons/bootstrap.webp", level: 85, category: "frontend" },
+    { name: "shadcn/ui", icon: "/icons/shadcn.webp", level: 80, category: "frontend" },
+    { name: "Ant Design", icon: "/icons/antdesign.webp", level: 80, category: "frontend" },
+    { name: "DaisyUI", icon: "/icons/daisyui.webp", level: 75, category: "frontend" },
+    { name: "Flowbite", icon: "/icons/flowbite.webp", level: 75, category: "frontend" },
+    { name: "Framer Motion", icon: "/icons/framer.webp", level: 80, category: "frontend" },
     
     // Backend
-    { name: "Node.js", icon: "/icons/nodejs.png", level: 80, category: "backend" },
-    { name: "Express.js", icon: "/icons/express.png", level: 80, category: "backend" },
-    { name: "Laravel", icon: "/icons/laravel.png", level: 85, category: "backend" },
+    { name: "Node.js", icon: "/icons/nodejs.webp", level: 80, category: "backend" },
+    { name: "Express.js", icon: "/icons/express.webp", level: 80, category: "backend" },
+    { name: "Laravel", icon: "/icons/laravel.webp", level: 85, category: "backend" },
     
     // Database
-    { name: "MySQL", icon: "/icons/mysql.png", level: 85, category: "database" },
-    { name: "PostgreSQL", icon: "/icons/postgresql.png", level: 80, category: "database" },
-    { name: "MongoDB", icon: "/icons/mongodb.png", level: 75, category: "database" },
+    { name: "MySQL", icon: "/icons/mysql.webp", level: 85, category: "database" },
+    { name: "PostgreSQL", icon: "/icons/postgresql.webp", level: 80, category: "database" },
+    { name: "MongoDB", icon: "/icons/mongodb.webp", level: 75, category: "database" },
     
     // Design & Other
-    { name: "Figma", icon: "/icons/figma.png", level: 80, category: "design" },
-    { name: "Git", icon: "/icons/git.png", level: 85, category: "other" },
+    { name: "Figma", icon: "/icons/figma.webp", level: 80, category: "design" },
+    { name: "Git", icon: "/icons/git.webp", level: 85, category: "other" },
   ];
 
   const filters = [

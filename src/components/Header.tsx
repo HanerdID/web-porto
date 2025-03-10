@@ -8,52 +8,63 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    // Optimasi event scroll dengan throttling
+    let isThrottled = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      if (!isThrottled) {
+        setIsScrolled(window.scrollY > 50);
+        isThrottled = true;
+        setTimeout(() => {
+          isThrottled = false;
+        }, 100); // Update setiap 100ms
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true }); // passive untuk performa
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Fungsi smooth scroll dengan perbaikan untuk mobile
+  // Fungsi smooth scroll yang dioptimasi dengan tipe yang benar
   const handleSmoothScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
     targetId: string
-  ) => {
+  ): void => {
     e.preventDefault();
 
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
-      // Tutup menu mobile dengan delay
+      // Untuk mobile, tutup menu dulu baru scroll
       if (mobileMenuOpen) {
-        // Untuk mobile, pertama tutup menu, lalu scroll setelah animasi menu tertutup
         setMobileMenuOpen(false);
 
-        // Berikan waktu untuk animasi penutupan menu
         setTimeout(() => {
-          // Scroll ke elemen target dengan animasi smooth
           targetElement.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
 
-          // Update URL hash tanpa reload halaman
           window.history.pushState(null, "", `#${targetId}`);
-        }, 300); // 300ms adalah durasi animasi penutupan menu
+        }, 300);
       } else {
-        // Untuk desktop, langsung scroll
         targetElement.scrollIntoView({
           behavior: "smooth",
           block: "start",
         });
 
-        // Update URL hash tanpa reload halaman
         window.history.pushState(null, "", `#${targetId}`);
       }
     }
   };
+
+  // Hanya renderkan sekali, bukan pada setiap render
+  const navigationItems = [
+    { id: "hero", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "projects", label: "Projects" },
+    { id: "skills", label: "Skills" },
+    { id: "contact", label: "Contact Me", isButton: true },
+  ];
 
   const navVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -72,20 +83,11 @@ export const Header = () => {
     visible: { opacity: 1, y: 0 },
   };
 
-  // Data navigasi untuk konsistensi antara desktop dan mobile
-  const navigationItems = [
-    { id: "hero", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "projects", label: "Projects" },
-    { id: "skills", label: "Skills" },
-    { id: "contact", label: "Contact Me", isButton: true },
-  ];
-
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
         isScrolled
-          ? "bg-white/80 dark:bg-dark-200/80 backdrop-blur-md shadow-md py-2"
+          ? "bg-white/90 dark:bg-dark-200/90 backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-4"
       }`}
     >
@@ -95,6 +97,7 @@ export const Header = () => {
             href="#hero"
             onClick={(e) => handleSmoothScroll(e, "hero")}
             className="relative z-10 cursor-pointer"
+            aria-label="Kembali ke bagian atas"
           >
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -130,6 +133,7 @@ export const Header = () => {
                       <a
                         href={`#${item.id}`}
                         onClick={(e) => handleSmoothScroll(e, item.id)}
+                        aria-label={`Navigasi ke bagian ${item.label}`}
                       >
                         {item.label}
                       </a>
@@ -139,6 +143,7 @@ export const Header = () => {
                       href={`#${item.id}`}
                       onClick={(e) => handleSmoothScroll(e, item.id)}
                       className="nav-link cursor-pointer"
+                      aria-label={`Navigasi ke bagian ${item.label}`}
                     >
                       {item.label}
                     </a>
@@ -148,7 +153,7 @@ export const Header = () => {
             </ul>
           </motion.nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - dengan aria-label yang lebih baik untuk aksesibilitas */}
           <div className="flex items-center gap-4 md:hidden">
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}
@@ -156,7 +161,8 @@ export const Header = () => {
               whileTap={{ scale: 0.9 }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-foreground p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors"
-              aria-label="Toggle Menu"
+              aria-label={mobileMenuOpen ? "Tutup menu" : "Buka menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
@@ -164,7 +170,7 @@ export const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu dengan aria-hidden saat tertutup untuk aksesibilitas */}
       <motion.div
         initial={{ height: 0, opacity: 0 }}
         animate={{
@@ -173,10 +179,11 @@ export const Header = () => {
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="md:hidden overflow-hidden bg-white dark:bg-dark-200"
+        aria-hidden={!mobileMenuOpen}
       >
         <div className="container mx-auto px-4 py-4">
           <ul className="flex flex-col space-y-4">
-            {navigationItems.map((item, index) => (
+            {navigationItems.map((item) => (
               <li key={item.id} className={item.isButton ? "pt-2" : ""}>
                 {item.isButton ? (
                   <Button
@@ -186,6 +193,7 @@ export const Header = () => {
                     <a
                       href={`#${item.id}`}
                       onClick={(e) => handleSmoothScroll(e, item.id)}
+                      aria-label={`Navigasi ke bagian ${item.label}`}
                     >
                       {item.label}
                     </a>
@@ -195,6 +203,7 @@ export const Header = () => {
                     href={`#${item.id}`}
                     onClick={(e) => handleSmoothScroll(e, item.id)}
                     className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
+                    aria-label={`Navigasi ke bagian ${item.label}`}
                   >
                     {item.label}
                   </a>
@@ -208,6 +217,7 @@ export const Header = () => {
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors"
+                  aria-label="Kunjungi GitHub"
                 >
                   <Github size={20} />
                 </a>
@@ -216,6 +226,7 @@ export const Header = () => {
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors"
+                  aria-label="Kunjungi LinkedIn"
                 >
                   <Linkedin size={20} />
                 </a>
@@ -224,6 +235,7 @@ export const Header = () => {
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-dark-100 transition-colors"
+                  aria-label="Kunjungi Instagram"
                 >
                   <Instagram size={20} />
                 </a>
@@ -235,3 +247,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;
