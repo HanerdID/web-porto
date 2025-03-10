@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Button } from "./ui/button";
 import { Download, ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 export const About = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
@@ -38,11 +39,22 @@ export const About = () => {
             className="relative"
           >
             <div className="aspect-square rounded-2xl overflow-hidden animated-border">
-              <div className="bg-card h-full w-full p-1 rounded-2xl overflow-hidden">
-                <div
-                  className="h-full w-full bg-cover bg-center rounded-xl"
-                  style={{ backgroundImage: "url('/images/profile.jpeg')" }}
-                />
+              <div className="bg-card h-[400px] md:h-[600px] w-full p-1 rounded-2xl overflow-hidden">
+                <div className="h-full w-full rounded-xl relative flex items-center justify-center">
+                  <Image
+                    src="/images/profile.jpeg"
+                    alt="Fikri Prasetya - Profile Photo"
+                    width={400}
+                    height={400}
+                    className="object-cover rounded-xl"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectPosition: "center top",
+                    }}
+                    priority
+                  />
+                </div>
               </div>
             </div>
 
@@ -140,8 +152,8 @@ export const About = () => {
           <h3 className="text-2xl font-bold mb-10 text-center">My Journey</h3>
 
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-muted"></div>
+            {/* Timeline line - ubah menjadi sesuai tinggi konten */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-theme-600/40"></div>
 
             {/* Timeline events */}
             <div className="space-y-12">
@@ -180,6 +192,14 @@ export const About = () => {
                 },
               ].map((event, index) => (
                 <div key={index} className="relative">
+                  {/* Dot connector line - khusus untuk semua kecuali item terakhir */}
+                  {index < 4 && (
+                    <div
+                      className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-theme-600/40"
+                      style={{ top: "24px", height: "calc(100% + 24px)" }}
+                    ></div>
+                  )}
+
                   <div
                     className={`flex items-center ${
                       index % 2 === 0 ? "flex-row-reverse" : ""
@@ -211,7 +231,7 @@ export const About = () => {
                       </motion.div>
                     </div>
 
-                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-4">
+                    <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={inView ? { scale: 1 } : { scale: 0 }}

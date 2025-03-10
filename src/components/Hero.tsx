@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 
 export const Hero = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
@@ -119,7 +119,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
             <Button className="bg-theme-600 hover:bg-theme-700 text-white font-medium text-lg px-8 py-6 h-auto rounded-full">
               <span>View My Work</span>
@@ -139,9 +139,9 @@ export const Hero = () => {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+            className="mt-4 mb-40 flex justify-center animate-bounce"
           >
-            <ArrowDown size={24} className="text-muted-foreground" />
+            <ArrowDown size={28} className="text-theme-600" />
           </motion.div>
         </div>
       </div>

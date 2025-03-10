@@ -18,16 +18,6 @@ export default function Home() {
     restDelta: 0.001,
   });
 
-  // Preload font icons
-  useEffect(() => {
-    // Create folder structure for fonts and icons
-    const createFolderStructure = async () => {
-      console.log("Creating folder structure for assets...");
-    };
-
-    createFolderStructure();
-  }, []);
-
   return (
     <>
       <Head>

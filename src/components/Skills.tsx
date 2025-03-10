@@ -11,7 +11,7 @@ type Skill = {
 
 export const Skills = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
@@ -19,39 +19,39 @@ export const Skills = () => {
 
   const skills: Skill[] = [
     // Programming Languages
-    { name: "JavaScript", icon: "/icons/javascript.svg", level: 90, category: "language" },
-    { name: "TypeScript", icon: "/icons/typescript.svg", level: 85, category: "language" },
-    { name: "Python", icon: "/icons/python.svg", level: 80, category: "language" },
-    { name: "PHP", icon: "/icons/php.svg", level: 85, category: "language" },
-    { name: "Java", icon: "/icons/java.svg", level: 75, category: "language" },
-    { name: "C", icon: "/icons/c.svg", level: 70, category: "language" },
+    { name: "JavaScript", icon: "/icons/js.png", level: 90, category: "language" },
+    { name: "TypeScript", icon: "/icons/ts.png", level: 85, category: "language" },
+    { name: "Python", icon: "/icons/python.png", level: 80, category: "language" },
+    { name: "PHP", icon: "/icons/php.png", level: 85, category: "language" },
+    { name: "Java", icon: "/icons/java.png", level: 75, category: "language" },
+    { name: "C", icon: "/icons/c.png", level: 70, category: "language" },
     
     // Frontend
-    { name: "HTML5", icon: "/icons/html5.svg", level: 95, category: "frontend" },
-    { name: "CSS3", icon: "/icons/css3.svg", level: 90, category: "frontend" },
-    { name: "React.js", icon: "/icons/react.svg", level: 90, category: "frontend" },
-    { name: "Next.js", icon: "/icons/nextjs.svg", level: 85, category: "frontend" },
-    { name: "Tailwind CSS", icon: "/icons/tailwindcss.svg", level: 90, category: "frontend" },
-    { name: "Bootstrap", icon: "/icons/bootstrap.svg", level: 85, category: "frontend" },
-    { name: "shadcn/ui", icon: "/icons/shadcn.svg", level: 80, category: "frontend" },
-    { name: "Ant Design", icon: "/icons/antdesign.svg", level: 80, category: "frontend" },
-    { name: "DaisyUI", icon: "/icons/daisyui.svg", level: 75, category: "frontend" },
-    { name: "Flowbite", icon: "/icons/flowbite.svg", level: 75, category: "frontend" },
-    { name: "Framer Motion", icon: "/icons/framer.svg", level: 80, category: "frontend" },
+    { name: "HTML5", icon: "/icons/html5.png", level: 95, category: "frontend" },
+    { name: "CSS3", icon: "/icons/css3.png", level: 90, category: "frontend" },
+    { name: "React.js", icon: "/icons/react.png", level: 90, category: "frontend" },
+    { name: "Next.js", icon: "/icons/nextjs.png", level: 85, category: "frontend" },
+    { name: "Tailwind CSS", icon: "/icons/tailwind.png", level: 90, category: "frontend" },
+    { name: "Bootstrap", icon: "/icons/bootstrap.png", level: 85, category: "frontend" },
+    { name: "shadcn/ui", icon: "/icons/shadcn.png", level: 80, category: "frontend" },
+    { name: "Ant Design", icon: "/icons/antdesign.png", level: 80, category: "frontend" },
+    { name: "DaisyUI", icon: "/icons/daisyui.png", level: 75, category: "frontend" },
+    { name: "Flowbite", icon: "/icons/flowbite.png", level: 75, category: "frontend" },
+    { name: "Framer Motion", icon: "/icons/framer.png", level: 80, category: "frontend" },
     
     // Backend
-    { name: "Node.js", icon: "/icons/nodejs.svg", level: 80, category: "backend" },
-    { name: "Express.js", icon: "/icons/express.svg", level: 80, category: "backend" },
-    { name: "Laravel", icon: "/icons/laravel.svg", level: 85, category: "backend" },
+    { name: "Node.js", icon: "/icons/nodejs.png", level: 80, category: "backend" },
+    { name: "Express.js", icon: "/icons/express.png", level: 80, category: "backend" },
+    { name: "Laravel", icon: "/icons/laravel.png", level: 85, category: "backend" },
     
     // Database
-    { name: "MySQL", icon: "/icons/mysql.svg", level: 85, category: "database" },
-    { name: "PostgreSQL", icon: "/icons/postgresql.svg", level: 80, category: "database" },
-    { name: "MongoDB", icon: "/icons/mongodb.svg", level: 75, category: "database" },
+    { name: "MySQL", icon: "/icons/mysql.png", level: 85, category: "database" },
+    { name: "PostgreSQL", icon: "/icons/postgresql.png", level: 80, category: "database" },
+    { name: "MongoDB", icon: "/icons/mongodb.png", level: 75, category: "database" },
     
     // Design & Other
-    { name: "Figma", icon: "/icons/figma.svg", level: 80, category: "design" },
-    { name: "Git", icon: "/icons/git.svg", level: 85, category: "other" },
+    { name: "Figma", icon: "/icons/figma.png", level: 80, category: "design" },
+    { name: "Git", icon: "/icons/git.png", level: 85, category: "other" },
   ];
 
   const filters = [

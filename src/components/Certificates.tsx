@@ -13,7 +13,7 @@ interface Certificate {
 
 export const Certificates = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 

@@ -7,7 +7,7 @@ import { Mail, Phone, MapPin, Send, Check, Loader2 } from "lucide-react";
 
 export const Contact = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
@@ -206,7 +206,7 @@ export const Contact = () => {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium">Phone</h4>
-                      <p className="text-muted-foreground mt-1">+62 8215 8731 643</p>
+                      <p className="text-muted-foreground mt-1">+62 821 5873 1643</p>
                       <a
                         href="tel:+6282158731643"
                         className="text-sm text-theme-600 hover:text-theme-700 mt-1 inline-block"
@@ -222,9 +222,9 @@ export const Contact = () => {
                     </div>
                     <div>
                       <h4 className="text-sm font-medium">Location</h4>
-                      <p className="text-muted-foreground mt-1">Jakarta, Indonesia</p>
+                      <p className="text-muted-foreground mt-1">Yogyakarta, Indonesia</p>
                       <a
-                        href="https://maps.google.com/?q=Jakarta,Indonesia"
+                        href="https://maps.google.com/?q=Yogyakarta,Indonesia"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-theme-600 hover:text-theme-700 mt-1 inline-block"
@@ -274,22 +274,6 @@ export const Contact = () => {
             </Card>
           </motion.div>
         </div>
-
-        {/* Google Maps Embed */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 rounded-xl overflow-hidden h-80 shadow-lg"
-        >
-          {/* Replace with your Google Maps Embed code */}
-          <div className="w-full h-full bg-muted flex items-center justify-center">
-            <p className="text-muted-foreground text-center">
-              Google Maps embed will appear here<br />
-              <span className="text-sm">Requires API Key and proper implementation</span>
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

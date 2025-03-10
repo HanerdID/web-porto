@@ -14,7 +14,7 @@ import {
 
 export const Projects = () => {
   const { ref, inView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
@@ -26,7 +26,7 @@ export const Projects = () => {
       title: "KS Spotseeker",
       description:
         "A tourism platform for Semarang Regency, featuring Google Maps integration, secure admin dashboard, and responsive design. Implemented as MSIB Batch 6 capstone project with Dicoding Indonesia.",
-      image: "/images/projects/spotseeker.jpg",
+      image: "/images/projects/spotseeker.png",
       tags: ["React.js", "Express.js", "PostgreSQL", "Google Maps API"],
       demoUrl: "https://ks-spotseeker.vercel.app/",
       githubUrl: "https://github.com/HanerdID/spotseeker",
@@ -37,7 +37,7 @@ export const Projects = () => {
       title: "Hunger Apps",
       description:
         "A restaurant catalog prototype with CRUD functionality, API integration, and responsive interfaces with search and filtering features to enhance user experience across all devices.",
-      image: "/images/projects/hunger-apps.jpg",
+      image: "/images/projects/hunger-apps.png",
       tags: ["HTML", "CSS", "JavaScript", "API Integration"],
       demoUrl: "https://hunger-apps-catalogue.vercel.app/",
       githubUrl: "https://github.com/HanerdID/hunger-apps",
