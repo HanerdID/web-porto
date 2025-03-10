@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "./ui/button";
 import { Menu, X, Github, Linkedin, Instagram } from "lucide-react";
+import { Button } from "./ui/button";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,15 +16,42 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Fungsi untuk smooth scroll ke section yang diinginkan
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // Tutup menu mobile jika terbuka
-      setMobileMenuOpen(false);
+  // Fungsi smooth scroll dengan perbaikan untuk mobile
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
+    e.preventDefault();
 
-      // Smooth scroll ke section
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      // Tutup menu mobile dengan delay
+      if (mobileMenuOpen) {
+        // Untuk mobile, pertama tutup menu, lalu scroll setelah animasi menu tertutup
+        setMobileMenuOpen(false);
+
+        // Berikan waktu untuk animasi penutupan menu
+        setTimeout(() => {
+          // Scroll ke elemen target dengan animasi smooth
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+
+          // Update URL hash tanpa reload halaman
+          window.history.pushState(null, "", `#${targetId}`);
+        }, 300); // 300ms adalah durasi animasi penutupan menu
+      } else {
+        // Untuk desktop, langsung scroll
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+
+        // Update URL hash tanpa reload halaman
+        window.history.pushState(null, "", `#${targetId}`);
+      }
     }
   };
 
@@ -46,6 +72,15 @@ export const Header = () => {
     visible: { opacity: 1, y: 0 },
   };
 
+  // Data navigasi untuk konsistensi antara desktop dan mobile
+  const navigationItems = [
+    { id: "hero", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "projects", label: "Projects" },
+    { id: "skills", label: "Skills" },
+    { id: "contact", label: "Contact Me", isButton: true },
+  ];
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
@@ -56,8 +91,9 @@ export const Header = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <div
-            onClick={() => scrollToSection("hero")}
+          <a
+            href="#hero"
+            onClick={(e) => handleSmoothScroll(e, "hero")}
             className="relative z-10 cursor-pointer"
           >
             <motion.div
@@ -74,7 +110,7 @@ export const Header = () => {
                 <span className="text-theme-600">Prasetya</span>
               </span>
             </motion.div>
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
           <motion.nav
@@ -84,46 +120,31 @@ export const Header = () => {
             variants={navVariants}
           >
             <ul className="flex items-center space-x-8">
-              <motion.li variants={itemVariants}>
-                <button
-                  onClick={() => scrollToSection("hero")}
-                  className="nav-link cursor-pointer"
-                >
-                  Home
-                </button>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <button
-                  onClick={() => scrollToSection("about")}
-                  className="nav-link cursor-pointer"
-                >
-                  About
-                </button>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <button
-                  onClick={() => scrollToSection("projects")}
-                  className="nav-link cursor-pointer"
-                >
-                  Projects
-                </button>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <button
-                  onClick={() => scrollToSection("skills")}
-                  className="nav-link cursor-pointer"
-                >
-                  Skills
-                </button>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <Button
-                  onClick={() => scrollToSection("contact")}
-                  className="bg-theme-600 hover:bg-theme-700 text-white rounded-full px-6"
-                >
-                  Contact Me
-                </Button>
-              </motion.li>
+              {navigationItems.map((item) => (
+                <motion.li key={item.id} variants={itemVariants}>
+                  {item.isButton ? (
+                    <Button
+                      asChild
+                      className="bg-theme-600 hover:bg-theme-700 text-white rounded-full px-6"
+                    >
+                      <a
+                        href={`#${item.id}`}
+                        onClick={(e) => handleSmoothScroll(e, item.id)}
+                      >
+                        {item.label}
+                      </a>
+                    </Button>
+                  ) : (
+                    <a
+                      href={`#${item.id}`}
+                      onClick={(e) => handleSmoothScroll(e, item.id)}
+                      className="nav-link cursor-pointer"
+                    >
+                      {item.label}
+                    </a>
+                  )}
+                </motion.li>
+              ))}
             </ul>
           </motion.nav>
 
@@ -155,46 +176,31 @@ export const Header = () => {
       >
         <div className="container mx-auto px-4 py-4">
           <ul className="flex flex-col space-y-4">
-            <li>
-              <button
-                onClick={() => scrollToSection("hero")}
-                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
-              >
-                Home
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("projects")}
-                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
-              >
-                Projects
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("skills")}
-                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
-              >
-                Skills
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection("about")}
-                className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
-              >
-                About
-              </button>
-            </li>
-            <li className="pt-2">
-              <Button
-                className="w-full bg-theme-600 hover:bg-theme-700 text-white"
-                onClick={() => scrollToSection("contact")}
-              >
-                Contact Me
-              </Button>
-            </li>
+            {navigationItems.map((item, index) => (
+              <li key={item.id} className={item.isButton ? "pt-2" : ""}>
+                {item.isButton ? (
+                  <Button
+                    asChild
+                    className="w-full bg-theme-600 hover:bg-theme-700 text-white"
+                  >
+                    <a
+                      href={`#${item.id}`}
+                      onClick={(e) => handleSmoothScroll(e, item.id)}
+                    >
+                      {item.label}
+                    </a>
+                  </Button>
+                ) : (
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => handleSmoothScroll(e, item.id)}
+                    className="block py-2 hover:text-theme-600 transition-colors cursor-pointer w-full text-left"
+                  >
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))}
             <li className="pt-4">
               <div className="flex space-x-4 items-center">
                 <a
