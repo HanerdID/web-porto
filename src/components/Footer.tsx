@@ -147,7 +147,7 @@ export const Footer = () => {
 
           <div className="border-t border-muted/50 pt-6 flex flex-col md:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm flex items-center">
-              &copy; {currentYear} Fikri Prasetya. All rights reserved.
+              &copy; {currentYear} Fikri Prasetya Nurhidayat. All rights reserved.
               <span className="inline-flex items-center mx-1">
                 <Heart
                   size={14}

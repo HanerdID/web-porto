@@ -43,7 +43,7 @@ export const About = () => {
                 <div className="h-full w-full rounded-xl relative flex items-center justify-center">
                   <Image
                     src="/images/profile.jpeg"
-                    alt="Fikri Prasetya - Profile Photo"
+                    alt="Fikri Prasetya Nurhidayat - Profile Photo"
                     width={400}
                     height={400}
                     className="object-cover rounded-xl"
@@ -74,7 +74,7 @@ export const About = () => {
               </h3>
 
               <p className="text-muted-foreground">
-                Hello! I'm Fikri Prasetya, a fresh Informatics graduate from
+                Hello! I'm Fikri Prasetya Nurhidayat, a fresh Informatics graduate from
                 Diponegoro University with a 3.73 GPA, specializing in web and
                 mobile development.
               </p>

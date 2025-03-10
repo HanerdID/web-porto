@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import TypewriterComponent from "typewriter-effect";
@@ -10,6 +10,7 @@ export const Hero = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -35,6 +36,17 @@ export const Hero = () => {
     document.addEventListener("mousemove", handleMouseMove);
     return () => document.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Tutup menu mobile jika terbuka
+      setMobileMenuOpen(false);
+
+      // Smooth scroll ke section
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <section
@@ -76,7 +88,7 @@ export const Hero = () => {
           >
             <span className="block">Hi, I'm</span>
             <span className="hero-text-gradient font-display">
-              Fikri Prasetya
+              Fikri Prasetya Nurhidayat
             </span>
           </motion.h1>
 
@@ -122,7 +134,10 @@ export const Hero = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
-            <Button className="bg-theme-600 hover:bg-theme-700 text-white font-medium text-lg px-8 py-6 h-auto rounded-full">
+            <Button
+              className="bg-theme-600 hover:bg-theme-700 text-white font-medium text-lg px-8 py-6 h-auto rounded-full"
+              onClick={() => scrollToSection("projects")}
+            >
               <span>View My Work</span>
               <Zap size={18} className="ml-2" />
             </Button>
@@ -130,6 +145,7 @@ export const Hero = () => {
             <Button
               variant="outline"
               className="border-theme-600 text-theme-600 hover:bg-theme-600/10 font-medium text-lg px-8 py-6 h-auto rounded-full"
+              onClick={() => scrollToSection("contact")}
             >
               <span>Get in Touch</span>
               <Code size={18} className="ml-2" />

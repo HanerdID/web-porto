@@ -37,7 +37,7 @@ export default function Home() {
     <>
       <Head>
         <title>
-          Fikri Prasetya | Frontend Developer & Computer Science Graduate
+          Fikri Prasetya Nurhidayat | Frontend Developer & Computer Science Graduate
         </title>
         <meta
           name="description"
@@ -46,7 +46,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="keywords"
-          content="Fikri Prasetya, Frontend Developer, Web Developer, React, Next.js, Portfolio, Diponegoro University"
+          content="Fikri Prasetya Nurhidayat, Frontend Developer, Web Developer, React, Next.js, Portfolio, Diponegoro University"
         />
         <meta name="author" content="Fikri Prasetya Nurhidayat" />
         <link rel="icon" href="/favicon.ico" />
