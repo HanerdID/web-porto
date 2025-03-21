@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html.js-loading * {
+  transition: none !important;
+}
+
 @layer base {
   :root {
     --background: 210 40% 98%;
@@ -504,4 +508,49 @@
 
 .enhanced-button:hover::before {
   left: 0;
+}
+
+@media (max-width: 767px) {
+  /* Kurangi animasi untuk mobile */
+  .reduce-mobile-animation {
+    transition-duration: 0.3s !important;
+    animation-duration: 0.3s !important;
+  }
+  
+  /* Kurangi atau hilangkan efek blur di mobile */
+  .mobile-blur-reduce {
+    backdrop-filter: blur(5px) !important;
+  }
+  
+  .mobile-no-blur {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+  }
+}
+
+/* Class khusus untuk preferensi performa tinggi */
+.high-performance-mode * {
+  /* Bukan menghilangkan animasi, tapi mengurangi intensitasnya */
+  transition-duration: 0.1s !important;
+  animation-duration: 0.1s !important;
+  animation-iteration-count: 1 !important;
+  
+  /* Kurangi efek yang berat */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  filter: none !important;
+  
+  /* Matikan parallax dan efek transformasi 3D yang rumit */
+  transform-style: flat !important;
+  perspective: none !important;
+}
+
+.high-performance-mode .disable-in-high-performance {
+  display: none !important;
+}
+
+/* Tambahkan delay pada animasi berulang untuk mencegah terlalu banyak perubahan */
+.high-performance-mode [class*="animate-"] {
+  animation-delay: 2s !important;
 }

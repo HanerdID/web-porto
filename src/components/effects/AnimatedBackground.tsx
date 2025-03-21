@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { isMobile } from "../../utils/device";
 
 interface Particle {
   x: number;
@@ -30,7 +31,9 @@ export const AnimatedBackground: React.FC = () => {
       // Pastikan kode ini hanya dijalankan di client-side
       if (typeof window === "undefined") return;
 
-      const totalParticles = Math.min(50, Math.floor(window.innerWidth / 30)); // Responsive particle count
+      const totalParticles = isMobile()
+        ? Math.min(15, Math.floor((window.innerWidth || 1000) / 80))
+        : Math.min(50, Math.floor((window.innerWidth || 1000) / 30));
 
       for (let i = 0; i < totalParticles; i++) {
         const particleColors = [
@@ -148,12 +151,14 @@ export const AnimatedBackground: React.FC = () => {
               const dy = particle.y - otherParticle.y;
               const distance = Math.sqrt(dx * dx + dy * dy);
 
-              if (distance < 150) {
+              if (distance < (isMobile() ? 80 : 150)) {
                 ctx.beginPath();
                 ctx.strokeStyle = `rgba(14, 165, 233, ${
-                  ((150 - distance) / 150) * 0.2
+                  ((isMobile() ? 0.1 : 0.2) *
+                    ((isMobile() ? 80 : 150) - distance)) /
+                  (isMobile() ? 80 : 150)
                 })`;
-                ctx.lineWidth = 0.5;
+                ctx.lineWidth = isMobile() ? 0.3 : 0.5;
                 ctx.moveTo(particle.x, particle.y);
                 ctx.lineTo(otherParticle.x, otherParticle.y);
                 ctx.stroke();

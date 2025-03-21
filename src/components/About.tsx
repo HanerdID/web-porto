@@ -161,7 +161,7 @@ export const About = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-theme-500 via-accent2 to-accent3 opacity-40"></div>
 
             {/* Timeline events */}
-            <div className="space-y-12 text-sm">
+            <div className="space-y-12">
               {[
                 {
                   year: "Feb 2025",
@@ -241,10 +241,10 @@ export const About = () => {
                         <span className="text-theme-600 font-semibold">
                           {event.year}
                         </span>
-                        <h4 className="text-lg font-semibold mt-1">
+                        <h4 className="text-sm md:text-base font-semibold mt-1">
                           {event.title}
                         </h4>
-                        <p className="text-muted-foreground mt-2">
+                        <p className="text-xs md:text-sm text-muted-foreground mt-2">
                           {event.description}
                         </p>
                       </motion.div>

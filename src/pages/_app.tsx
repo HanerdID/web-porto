@@ -1,13 +1,14 @@
+// src/pages/_app.tsx
+import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Impor AOS CSS
+import "aos/dist/aos.css";
 import { useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
-import Lenis from "@studio-freight/lenis";
 import "../styles/globals.css";
 
-function MyApp({ Component, pageProps, router }: AppProps) {
-  // Inisialisasi AOS untuk animasi scroll
+// Bungkus AppComponent dengan noSSR untuk menghindari hidratasi
+const App = ({ Component, pageProps, router }: AppProps) => {
+  // Inisialisasi AOS
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -16,48 +17,10 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     });
   }, []);
 
-  // Inisialisasi Lenis untuk smooth scrolling
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    });
+  return <Component {...pageProps} key={router.route} />;
+};
 
-    // Hubungkan dengan requestAnimationFrame
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    // Cleanup
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
-  // Preferensi reduce motion untuk aksesibilitas
-  useEffect(() => {
-    // Pastikan kode ini berjalan di client-side
-    if (typeof window !== "undefined") {
-      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      if (mediaQuery.matches) {
-        // Matikan animasi jika pengguna memilih preferensi reduce motion
-        document.documentElement.classList.add("reduce-motion");
-      }
-    }
-  }, []);
-
-  return (
-    <AnimatePresence mode="wait">
-      <Component {...pageProps} key={router.route} />
-    </AnimatePresence>
-  );
-}
-
-export default MyApp;
+// Ekspor versi noSSR dari App
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});

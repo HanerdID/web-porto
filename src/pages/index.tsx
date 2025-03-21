@@ -12,17 +12,19 @@ import { Footer } from "../components/Footer";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { ArrowDown, Sparkles } from "lucide-react";
+import { isMobile } from "../utils/device";
+import LoadingScreen from "../components/effects/LoadingScreen";
+import ParallaxSection from "../components/effects/ParallaxSection";
+import AnimatedDivider from "../components/effects/AnimatedDivider";
+import EnhancedScrollProgress from "../components/effects/EnhancedScrollProgress";
+import SVGWaveDivider from "../components/effects/SVGWaveDivider";
+import GeometricPatterns from "../components/effects/GeometricPatterns";
+import { Suspense } from "react";
+import NoSSR from "../components/effects/NoSSR";
 
-// Import komponen baru dengan dynamic loading untuk optimasi performa
+// Gunakan dynamic import untuk komponen berat
 const AnimatedBackground = dynamic(
   () => import("../components/effects/AnimatedBackground"),
-  {
-    ssr: false,
-  }
-);
-
-const GeometricPatterns = dynamic(
-  () => import("../components/effects/GeometricPatterns"),
   {
     ssr: false,
   }
@@ -42,73 +44,25 @@ const MouseFollowEffect = dynamic(
   }
 );
 
-// Import komponen lain yang tidak perlu dynamic loading
-import ParallaxSection from "../components/effects/ParallaxSection";
-import AnimatedDivider from "../components/effects/AnimatedDivider";
-import EnhancedScrollProgress from "../components/effects/EnhancedScrollProgress";
-import SVGWaveDivider from "../components/effects/SVGWaveDivider";
+const PerformanceToggle = dynamic(
+  () => import("../components/effects/PerformanceToggle"),
+  {
+    ssr: false,
+  }
+);
 
 // Loading screen component
-// Modifikasi LoadingScreen component
-const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => {
-  return (
-    <motion.div
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: isLoading ? 1 : 0 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
-      onAnimationComplete={() => {
-        if (!isLoading) {
-          // Hapus elemen loading dari DOM setelah animasi selesai
-          const loadingEl = document.getElementById('loading-screen');
-          if (loadingEl) loadingEl.style.display = 'none';
-        }
-      }}
-      id="loading-screen"
-    >
-      {/* Konten loading screen */}
-      <div className="relative flex items-center justify-center">
-        <motion.div
-          className="absolute w-32 h-32 rounded-full bg-theme-600/20"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 0.2, 0.5]
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <div className="rounded-md bg-gradient-to-br from-theme-600 to-theme-800 p-4 z-10">
-          <span className="text-white font-display text-4xl">FP</span>
-        </div>
-      </div>
-      <motion.div
-        className="mt-6 text-theme-600 font-medium flex items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        <Sparkles size={16} className="mr-2" />
-        <span>Welcome to Fikri's Portofolio</span>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// Scroll indicator component
 const ScrollIndicator = () => {
   return (
     <motion.div
-      className="fixed bottom-20 right-8 p-4 rounded-2xl transform -translate-x-1/2 z-40 hidden md:flex flex-col items-center"
+      className="fixed bottom-6 right-6 z-40 hidden md:flex flex-col items-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 3, duration: 0.8 }}
     >
       <span className="text-sm text-muted-foreground mb-2">Scroll</span>
       <motion.div
-        className="w-6 h-10 border-2 border-muted bg-black/60 rounded-full flex justify-center p-1"
+        className="w-6 h-10 border-2 border-muted rounded-full flex justify-center p-1"
         initial={{ opacity: 0.5 }}
         animate={{ opacity: 1 }}
       >
@@ -133,6 +87,7 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
+  const [effectsLoaded, setEffectsLoaded] = useState(false);
 
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -142,21 +97,37 @@ export default function Home() {
 
   useEffect(() => {
     // Sembunyikan konten selama loading
-    document.body.style.overflow = "hidden";
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "hidden";
+    }
 
-    // Simulate loading time
+    // Simulate loading time - lebih cepat di mobile
+    const loadingTime = isMobile() ? 1500 : 2000;
+
     const timer = setTimeout(() => {
       setIsLoading(false);
       // Tambahkan delay kecil sebelum menampilkan konten
       setTimeout(() => {
         setContentVisible(true);
-        document.body.style.overflow = "";
+        if (typeof document !== "undefined") {
+          document.body.style.overflow = "";
+        }
+
+        // Muat efek tambahan setelah konten utama
+        setTimeout(
+          () => {
+            setEffectsLoaded(true);
+          },
+          isMobile() ? 1000 : 500
+        );
       }, 300);
-    }, 2000);
+    }, loadingTime);
 
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = "";
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "";
+      }
     };
   }, []);
 
@@ -194,26 +165,33 @@ export default function Home() {
       {/* Loading screen */}
       <LoadingScreen isLoading={isLoading} />
 
+      {/* Main content - visible after loading */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: contentVisible ? 1 : 0 }}
         transition={{ duration: 0.5 }}
         className={`${contentVisible ? "block" : "invisible"}`}
       >
-        {/* Background effects */}
-        <AnimatedBackground />
-        <FloatingShapes count={8} />
+        {/* Background effects - loaded progressively */}
+        <NoSSR>{effectsLoaded && !isMobile() && <AnimatedBackground />}</NoSSR>
+        <NoSSR>
+          {effectsLoaded && <FloatingShapes count={isMobile() ? 3 : 8} />}
+        </NoSSR>
 
-        {/* Mouse follow effect */}
-        <MouseFollowEffect
-          size={30}
-          showTrail={true}
-          color="rgba(14, 165, 233, 0.4)"
-        />
+        {/* Mouse follow hanya di desktop dan setelah konten dimuat */}
+        <NoSSR>
+          {effectsLoaded && !isMobile() && (
+            <MouseFollowEffect
+              size={30}
+              showTrail={true}
+              color="rgba(14, 165, 233, 0.4)"
+            />
+          )}
+        </NoSSR>
 
         {/* Scroll Progress Indicator */}
         <EnhancedScrollProgress
-          height={4}
+          height={isMobile() ? 3 : 4}
           gradientFrom="#0ea5e9"
           gradientTo="#4ECDC4"
           gradientVia="#FF6B6B"
@@ -226,34 +204,38 @@ export default function Home() {
           <div className="absolute inset-0 bg-pattern opacity-[0.015] pointer-events-none z-0" />
 
           {/* Animated geometric patterns in different sections */}
-          <div className="absolute top-0 left-0 right-0 h-screen overflow-hidden pointer-events-none">
-            <GeometricPatterns variant="top" />
-          </div>
+          {effectsLoaded && (
+            <>
+              <div className="absolute top-0 left-0 right-0 h-screen overflow-hidden pointer-events-none">
+                <GeometricPatterns variant="top" />
+              </div>
 
-          <div className="absolute top-[100vh] left-0 right-0 h-screen overflow-hidden pointer-events-none">
-            <GeometricPatterns variant="middle" />
-          </div>
+              <div className="absolute top-[100vh] left-0 right-0 h-screen overflow-hidden pointer-events-none">
+                <GeometricPatterns variant="middle" />
+              </div>
 
-          <div className="absolute top-[200vh] left-0 right-0 h-screen overflow-hidden pointer-events-none">
-            <GeometricPatterns variant="bottom" />
-          </div>
+              <div className="absolute top-[200vh] left-0 right-0 h-screen overflow-hidden pointer-events-none">
+                <GeometricPatterns variant="bottom" />
+              </div>
+            </>
+          )}
 
           <Header />
 
-          <ScrollIndicator />
+          {!isMobile() && <ScrollIndicator />}
 
           <main className="flex-grow pt-20 relative z-10">
             {/* Hero section with improved animations */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: isLoading ? 2.2 : 0 }}
+              transition={{ duration: 0.8, delay: isLoading ? 0.2 : 0 }}
             >
               <Hero />
             </motion.div>
 
             {/* About section with parallax effect */}
-            <ParallaxSection direction="up" intensity={0.1}>
+            <ParallaxSection direction="up" intensity={isMobile() ? 0.05 : 0.1}>
               <About />
             </ParallaxSection>
 
@@ -264,7 +246,10 @@ export default function Home() {
             />
 
             {/* Projects section with floating elements */}
-            <ParallaxSection direction="down" intensity={0.1}>
+            <ParallaxSection
+              direction="down"
+              intensity={isMobile() ? 0.05 : 0.1}
+            >
               <Projects />
             </ParallaxSection>
 
@@ -285,7 +270,7 @@ export default function Home() {
             />
 
             {/* Certificates section with parallax effect */}
-            <ParallaxSection direction="up" intensity={0.1}>
+            <ParallaxSection direction="up" intensity={isMobile() ? 0.05 : 0.1}>
               <Certificates />
             </ParallaxSection>
 
@@ -297,7 +282,7 @@ export default function Home() {
               <SVGWaveDivider
                 type="curve"
                 color="#0f172a"
-                height={100}
+                height={isMobile() ? 60 : 100}
                 position="top"
                 flip={true}
               />
@@ -340,43 +325,49 @@ export default function Home() {
                   </Button>
                 </motion.div>
 
-                {/* Decorative elements */}
-                <motion.div
-                  className="absolute left-10 top-10 w-20 h-20 rounded-full bg-theme-500/20 blur-xl"
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                {/* Decorative elements - reduced for mobile */}
+                {!isMobile() && (
+                  <>
+                    <motion.div
+                      className="absolute left-10 top-10 w-20 h-20 rounded-full bg-theme-500/20 blur-xl disable-in-high-performance"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
 
-                <motion.div
-                  className="absolute right-10 bottom-10 w-24 h-24 rounded-full bg-accent2/20 blur-xl"
-                  animate={{
-                    scale: [1.2, 0.8, 1.2],
-                    opacity: [0.4, 0.2, 0.4],
-                  }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                    <motion.div
+                      className="absolute right-10 bottom-10 w-24 h-24 rounded-full bg-accent2/20 blur-xl"
+                      animate={{
+                        scale: [1.2, 0.8, 1.2],
+                        opacity: [0.4, 0.2, 0.4],
+                      }}
+                      transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </>
+                )}
               </div>
             </section>
 
             {/* Contact section with parallax effect */}
-            <ParallaxSection direction="up" intensity={0.1}>
+            <ParallaxSection direction="up" intensity={isMobile() ? 0.05 : 0.1}>
               <Contact />
             </ParallaxSection>
           </main>
 
           <Footer />
         </div>
+
+        
       </motion.div>
     </>
   );

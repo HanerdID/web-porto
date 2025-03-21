@@ -82,6 +82,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <script src="/performance-toggle.js" />
       </body>
     </Html>
   );

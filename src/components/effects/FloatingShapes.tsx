@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { isMobile } from "../../utils/device";
 
 interface ShapeProps {
   top?: string;
@@ -141,7 +142,7 @@ interface FloatingShapesProps {
 }
 
 export const FloatingShapes: React.FC<FloatingShapesProps> = ({
-  count = 6,
+  count = isMobile() ? 3 : 6,
   colors = ["#0ea5e9", "#4ECDC4", "#FF6B6B", "#FFD166"],
 }) => {
   // Generate random shapes

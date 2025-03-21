@@ -5,6 +5,7 @@ import TypewriterComponent from "typewriter-effect";
 import { ArrowDown, Code, Sparkles, Zap } from "lucide-react";
 import { Button } from "./ui/button";
 import AnimatedText from "./effects/AnimatedText";
+import { isMobile } from "../utils/device";
 
 export const Hero = () => {
   const { ref, inView } = useInView({
@@ -129,9 +130,11 @@ export const Hero = () => {
 
       {/* Animated background elements */}
       <motion.div
-        className="absolute left-[10%] top-[20%] w-64 h-64 rounded-full bg-theme-500/10 blur-3xl z-0"
+        className={`absolute left-[10%] top-[20%] w-64 h-64 rounded-full bg-theme-500/10 ${
+          isMobile() ? "blur-xl" : "blur-3xl"
+        } z-0`}
         style={{ x: tiltX, y: tiltY }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: isMobile() ? 0.4 : 0.8 }}
       />
 
       <motion.div
@@ -192,12 +195,12 @@ export const Hero = () => {
                   duration={0.1}
                 />
               </span>
-              <span className="hero-text-gradient font-display block mt-2">
+              <span className="hero-text-gradient font-display block mt-2 py-2">
                 <AnimatedText
                   text="Fikri Prasetya Nurhidayat"
-                  animationType="wave"
-                  duration={0.04}
-                  delay={0.5}
+                  animationType={isMobile() ? "fade" : "wave"}
+                  duration={isMobile() ? 0.08 : 0.04}
+                  delay={isMobile() ? 0.2 : 0.5}
                 />
               </span>
             </motion.h1>
@@ -281,7 +284,7 @@ export const Hero = () => {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 1, delay: 1.2 }}
-            className="mt-4 mb-40 flex justify-center animate-bounce"
+            className="mt-4 mb-44 md:mb-40 flex justify-center animate-bounce"
           >
             <ArrowDown size={28} className="text-theme-600" />
           </motion.div>

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { isMobile } from "../../utils/device";
 
 interface ThreeDEffectProps {
   children: React.ReactNode;
@@ -15,12 +16,12 @@ interface ThreeDEffectProps {
 export const ThreeDEffect: React.FC<ThreeDEffectProps> = ({
   children,
   className = "",
-  intensity = 10,
+  intensity = isMobile() ? 5 : 10,
   perspective = 1000,
-  shadow = true,
-  layers = 0,
+  shadow = !isMobile(),
+  layers = isMobile() ? 0 : 3,
   reset = true,
-  glare = true,
+  glare = !isMobile(),
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
