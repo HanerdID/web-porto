@@ -143,7 +143,7 @@ export const Skills = () => {
             return (
               <motion.div key={skill.name} variants={item} className="group">
                 <div
-                  className={`${bgColor} dark:bg-dark-100/40 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-muted`}
+                  className={`${bgColor} dark:bg-dark-100/40 backdrop-blur-sm rounded-xl p-6 flex flex-col items-center text-center h-full transition-all duration-300 shadow-lg border border-black/10 hover:bg-theme-200 hover:cursor-pointer hover:-translate-y-1 `}
                 >
                   <div className="relative w-16 h-16 mb-4 flex items-center justify-center">
                     <div className="absolute inset-0 bg-muted/50 dark:bg-theme-900/20 rounded-full group-hover:scale-110 transition-transform duration-300"></div>
@@ -158,19 +158,6 @@ export const Skills = () => {
                     />
                   </div>
                   <h3 className="font-medium mb-2">{skill.name}</h3>
-                  <div className="w-full bg-muted rounded-full h-1.5 mt-auto">
-                    <motion.div
-                      className="bg-theme-600 h-1.5 rounded-full"
-                      initial={{ width: 0 }}
-                      animate={
-                        inView ? { width: `${skill.level}%` } : { width: 0 }
-                      }
-                      transition={{ duration: 1, delay: 0.5 }}
-                    />
-                  </div>
-                  <span className="text-xs text-muted-foreground mt-1">
-                    {skill.level}%
-                  </span>
                 </div>
               </motion.div>
             );

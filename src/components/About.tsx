@@ -161,33 +161,25 @@ export const About = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-theme-500 via-accent2 to-accent3 opacity-40"></div>
 
             {/* Timeline events */}
-            <div className="space-y-12">
+            <div className="space-y-4">
               {[
                 {
-                  year: "Feb 2025",
-                  title:
-                    "Graduated from Diponegoro University",
-                  description:
-                    "Completed Bachelor's degree in Computer Science from Diponegoro University.",
-                  dotColor: "bg-theme-600", // Warna biru tema
-                },
-                {
-                  year: "Oct 2024 - Jan 2025",
+                  year: "2025",
                   title:
                     "Frontend Developer Intern at PT Daekyung Indah Heavy Industry",
                   description:
                     "Contributed to Human Resource Management System development, implementing interfaces for room management, authentication, and payroll processing with responsive design and API integration.",
-                  dotColor: "bg-theme-600", // Warna biru tema
+                  dotColor: "bg-theme-600", 
                 },
                 {
                   year: "Feb 2024 - Jun 2024",
                   title: "SIB Dicoding Cycle 6 Graduate",
                   description:
                     "Completed Frontend and Backend Web Developer certification courses on Dicoding platform.",
-                  dotColor: "bg-accent1", // Warna turquoise accent
+                  dotColor: "bg-accent1",
                 },
                 {
-                  year: "Jan 2024 - Feb 2024",
+                  year: "2024",
                   title:
                     "Frontend Developer at PT Digital Logistik Internasional",
                   description:
@@ -198,7 +190,14 @@ export const About = () => {
                   year: "Aug 2023 - Dec 2023",
                   title: "Frontend Developer",
                   description:
-                    "Created a student academic information monitoring system for course project named SIMONIKA",
+                    "Completed Frontend and Backend Web Developer certification courses on Dicoding platform, alongside Alibaba Cloud and Oracle certifications.",
+                  dotColor: "bg-accent2", // Warna turquoise accent
+                },
+                {
+                  year: "2024",
+                  title: "Developed Key Projects",
+                  description:
+                    "Created KS Spotseeker and Hunger Apps, implementing full-stack solutions with modern technologies and responsive design.",
                   dotColor: "bg-accent3", // Warna kuning accent
                 },
                 {
@@ -206,7 +205,7 @@ export const About = () => {
                   title: "Started Computer Science Degree",
                   description:
                     "Enrolled in the Informatics program at Diponegoro University, beginning my journey in computer science.",
-                  dotColor: "bg-theme-500", // Warna biru muda tema
+                  dotColor: "bg-theme-500", 
                 },
               ].map((event, index) => (
                 <div key={index} className="relative">

@@ -236,8 +236,7 @@ export const Hero = () => {
             className="mb-8 max-w-2xl mx-auto"
           >
             <p className="text-muted-foreground">
-              Fresh Informatics graduate from Diponegoro University,
-              specializing in web and mobile development. Passionate about
+              Fresh Informatics graduate from Diponegoro University, specializing in web and mobile development. Passionate about
               creating innovative applications that solve real-world problems.
             </p>
           </motion.div>
