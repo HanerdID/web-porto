@@ -47,7 +47,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ isLoading }) => {
         transition={{ delay: 0.5 }}
       >
         <Sparkles size={16} className="mr-2" />
-        <span>Menginisialisasi Kreativitas</span>
+        <span>Welcome to Fikri's Portofolio</span>
       </motion.div>
     </motion.div>
   );
