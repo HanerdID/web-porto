@@ -13,7 +13,7 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="py-20 bg-gradient-to-b from-background to-muted/30"
+      className="pt-20 bg-gradient-to-b from-background to-muted/30"
       ref={ref}
     >
       <div className="container mx-auto px-4">
@@ -74,9 +74,9 @@ export const About = () => {
               </h3>
 
               <p className="text-muted-foreground">
-                Hello! I'm Fikri Prasetya Nurhidayat, a fresh Informatics graduate from
-                Diponegoro University with a 3.73 GPA, specializing in web and
-                mobile development.
+                Hello! I'm Fikri Prasetya Nurhidayat, a fresh Informatics
+                graduate from Diponegoro University with a 3.73 GPA,
+                specializing in web and mobile development.
               </p>
 
               <p className="text-muted-foreground">
@@ -109,6 +109,10 @@ export const About = () => {
               <h4 className="text-lg font-semibold mt-6">Experience</h4>
               <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-2">
                 <li>
+                  Frontend Developer at PT Sinergi Merah Putih (March 2025 -
+                  April 2025)
+                </li>
+                <li>
                   Frontend Developer at PT Daekyung Indah Heavy Industry (Oct
                   2024 - Jan 2025)
                 </li>
@@ -116,7 +120,6 @@ export const About = () => {
                   Frontend Developer at PT Digital Logistik Internasional (Jan
                   2024 - Feb 2024)
                 </li>
-                <li>Frontend Developer Intern (2024 - 2025)</li>
               </ul>
 
               <div className="flex flex-wrap gap-4 mt-8">
@@ -158,10 +161,18 @@ export const About = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-theme-500 via-accent2 to-accent3 opacity-40"></div>
 
             {/* Timeline events */}
-            <div className="space-y-12">
+            <div className="space-y-12 text-sm">
               {[
                 {
-                  year: "2025",
+                  year: "Feb 2025",
+                  title:
+                    "Graduated from Diponegoro University",
+                  description:
+                    "Completed Bachelor's degree in Computer Science from Diponegoro University.",
+                  dotColor: "bg-theme-600", // Warna biru tema
+                },
+                {
+                  year: "Oct 2024 - Jan 2025",
                   title:
                     "Frontend Developer Intern at PT Daekyung Indah Heavy Industry",
                   description:
@@ -169,29 +180,29 @@ export const About = () => {
                   dotColor: "bg-theme-600", // Warna biru tema
                 },
                 {
-                  year: "2024",
+                  year: "Feb 2024 - Jun 2024",
+                  title: "SIB Dicoding Cycle 6 Graduate",
+                  description:
+                    "Completed Frontend and Backend Web Developer certification courses on Dicoding platform.",
+                  dotColor: "bg-accent1", // Warna turquoise accent
+                },
+                {
+                  year: "Jan 2024 - Feb 2024",
                   title:
                     "Frontend Developer at PT Digital Logistik Internasional",
                   description:
                     "Developed a prototype of the company's application with a more interactive and modern design, incorporating various animations.",
-                  dotColor: "bg-accent1", // Warna merah accent
+                  dotColor: "bg-accent2", // Warna merah accent
                 },
                 {
-                  year: "2024",
-                  title: "Certification in Full-Stack Web Development",
+                  year: "Aug 2023 - Dec 2023",
+                  title: "Frontend Developer",
                   description:
-                    "Completed Frontend and Backend Web Developer certification courses on Dicoding platform, alongside Alibaba Cloud and Oracle certifications.",
-                  dotColor: "bg-accent2", // Warna turquoise accent
-                },
-                {
-                  year: "2024",
-                  title: "Developed Key Projects",
-                  description:
-                    "Created KS Spotseeker and Hunger Apps, implementing full-stack solutions with modern technologies and responsive design.",
+                    "Created a student academic information monitoring system for course project named SIMONIKA",
                   dotColor: "bg-accent3", // Warna kuning accent
                 },
                 {
-                  year: "2021",
+                  year: "Jun 2021",
                   title: "Started Computer Science Degree",
                   description:
                     "Enrolled in the Informatics program at Diponegoro University, beginning my journey in computer science.",

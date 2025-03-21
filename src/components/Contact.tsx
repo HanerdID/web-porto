@@ -231,26 +231,6 @@ export const Contact = () => {
 
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0 rounded-full bg-theme-500/10 p-3">
-                        <Phone className="h-5 w-5 text-theme-600" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-medium">Phone</h4>
-                        <p className="text-muted-foreground mt-1">
-                          +62 821 5873 1643
-                        </p>
-                        <a
-                          href="https://wa.me/6282158731643?text=Hello%20Fikri%2C%20I%20visited%20your%20portfolio%20website%20and%20would%20like%20to%20connect."
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-theme-600 hover:text-theme-700 mt-1 inline-block"
-                        >
-                          Chat on WhatsApp
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 rounded-full bg-theme-500/10 p-3">
                         <MapPin className="h-5 w-5 text-theme-600" />
                       </div>
                       <div>

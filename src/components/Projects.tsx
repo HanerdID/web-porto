@@ -189,7 +189,7 @@ export const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
-          className="text-2xl font-bold mb-8 text-center"
+          className="text-2xl font-bold mb-4 text-center"
         >
           Other Projects
         </motion.h3>
@@ -209,7 +209,7 @@ export const Projects = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center mt-12"
+          className="text-center pb-20"
         >
           <Button
             variant="outline"
