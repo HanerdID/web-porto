@@ -164,7 +164,21 @@ export const About = () => {
             <div className="space-y-4">
               {[
                 {
-                  year: "2025",
+                  year: "March 2025 - April 2025",
+                  title: "Frontend Developer at PT Sinergi Merah Putih",
+                  description:
+                    "Working on the development of a Human Resource Management System for the company, focusing on the frontend side.",
+                  dotColor: "bg-accent3", 
+                },
+                {
+                  year: "Feb 2025",
+                  title: "Graduated from Diponegoro University",
+                  description:
+                    "Completed Bachelor's degree in Computer Science from Diponegoro University.",
+                  dotColor: "bg-theme-500", 
+                },
+                {
+                  year: "Oct 2024 - Jan 2025",
                   title:
                     "Frontend Developer Intern at PT Daekyung Indah Heavy Industry",
                   description:
@@ -179,7 +193,7 @@ export const About = () => {
                   dotColor: "bg-accent1",
                 },
                 {
-                  year: "2024",
+                  year: "Jan 2024 - Feb 2024",
                   title:
                     "Frontend Developer at PT Digital Logistik Internasional",
                   description:
@@ -190,15 +204,8 @@ export const About = () => {
                   year: "Aug 2023 - Dec 2023",
                   title: "Frontend Developer",
                   description:
-                    "Completed Frontend and Backend Web Developer certification courses on Dicoding platform, alongside Alibaba Cloud and Oracle certifications.",
-                  dotColor: "bg-accent2", // Warna turquoise accent
-                },
-                {
-                  year: "2024",
-                  title: "Developed Key Projects",
-                  description:
-                    "Created KS Spotseeker and Hunger Apps, implementing full-stack solutions with modern technologies and responsive design.",
-                  dotColor: "bg-accent3", // Warna kuning accent
+                    "Created a student academic information monitoring system for course project named SIMONIKA",
+                  dotColor: "bg-accent3", 
                 },
                 {
                   year: "Jun 2021",
