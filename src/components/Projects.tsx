@@ -83,7 +83,7 @@ export const Projects = () => {
   );
 
   return (
-    <section id="projects" className="py-20 bg-gradient-blue" ref={ref}>
+    <section id="projects" className="pt-20 bg-gradient-blue" ref={ref}>
       <div className="absolute top-20 right-10 w-72 h-72 bg-accent2/10 rounded-full blur-3xl z-0" />
       <div className="container mx-auto px-4">
         <motion.div

@@ -13,7 +13,7 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="pt-20 bg-gradient-to-b from-background to-muted/30"
+      className="py-20 bg-gradient-to-b from-background to-muted/30"
       ref={ref}
     >
       <div className="container mx-auto px-4">
@@ -169,7 +169,7 @@ export const About = () => {
                     "Frontend Developer Intern at PT Daekyung Indah Heavy Industry",
                   description:
                     "Contributed to Human Resource Management System development, implementing interfaces for room management, authentication, and payroll processing with responsive design and API integration.",
-                  dotColor: "bg-theme-600", 
+                  dotColor: "bg-theme-600",
                 },
                 {
                   year: "Feb 2024 - Jun 2024",
@@ -205,7 +205,7 @@ export const About = () => {
                   title: "Started Computer Science Degree",
                   description:
                     "Enrolled in the Informatics program at Diponegoro University, beginning my journey in computer science.",
-                  dotColor: "bg-theme-500", 
+                  dotColor: "bg-theme-500",
                 },
               ].map((event, index) => (
                 <div key={index} className="relative">

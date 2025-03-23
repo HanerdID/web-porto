@@ -2,8 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   // Nonaktifkan turbopack sementara karena masalah kompatibilitas dengan Tailwind 4
-  experimental: {
-  },
+  experimental: {},
 };
 
 module.exports = nextConfig;
