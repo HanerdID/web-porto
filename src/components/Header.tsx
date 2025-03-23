@@ -94,8 +94,7 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <a
-            href="#hero"
-            onClick={(e) => handleSmoothScroll(e, "hero")}
+            href="/"
             className="relative z-10 cursor-pointer"
             aria-label="Kembali ke bagian atas"
           >
